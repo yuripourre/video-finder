@@ -14,13 +14,13 @@ import br.com.etyllica.context.Application;
 import br.com.etyllica.core.event.GUIEvent;
 import br.com.etyllica.core.event.KeyEvent;
 import br.com.etyllica.core.event.PointerEvent;
+import br.com.etyllica.core.graphics.Graphic;
 import br.com.etyllica.core.input.mouse.MouseButton;
-import br.com.etyllica.core.video.Graphic;
 import br.com.etyllica.layer.BufferedLayer;
 import br.com.etyllica.motion.core.features.Component;
 import br.com.etyllica.motion.filter.color.ColorStrategy;
-import br.com.etyllica.motion.filter.modifier.QuickHullModifier;
 import br.com.etyllica.motion.filter.search.TriangularSearch;
+import br.com.etyllica.motion.modifier.QuickHullModifier;
 
 
 public class SignFinder extends Application{
