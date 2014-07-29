@@ -20,10 +20,10 @@ import br.com.etyllica.layer.BufferedLayer;
 import br.com.etyllica.motion.core.features.Component;
 import br.com.etyllica.motion.filter.color.ColorStrategy;
 import br.com.etyllica.motion.filter.search.TriangularSearch;
-import br.com.etyllica.motion.modifier.QuickHullModifier;
+import br.com.etyllica.motion.modifier.hull.FastConvexHullModifier;
 
 
-public class SignFinder extends Application{
+public class SignFinder extends Application {
 
 	private BufferedLayer layer = null;
 	
@@ -48,7 +48,7 @@ public class SignFinder extends Application{
 				
 		filter = new TriangularSearch(w, h);
 		
-		filter.setComponentModifierStrategy(new QuickHullModifier());
+		filter.setComponentModifierStrategy(new FastConvexHullModifier());
 		
 		colorStrategy = new ColorStrategy(Color.BLACK);
 		colorStrategy.setTolerance(0x10);
@@ -60,7 +60,7 @@ public class SignFinder extends Application{
 		loading = 100;
 	}
 	
-	private void reloadFrame(){
+	private void reloadFrame() {
 		
 		try {
 
@@ -80,7 +80,7 @@ public class SignFinder extends Application{
 	}
 	
 	@Override
-	public void update(long now){
+	public void update(long now) {
 
 		//Now we search for the first pixel with the desired color in the whole screen
 		//components = filter.filter(layer.getModifiedBuffer(), screen);
@@ -89,7 +89,7 @@ public class SignFinder extends Application{
 
 	}
 	
-	private void filter(){
+	private void filter() {
 		components = filter.filter(layer.getModifiedBuffer(), screen);
 	}
 	
@@ -103,7 +103,7 @@ public class SignFinder extends Application{
 		
 		g.setColor(Color.BLACK);
 		
-		for(Component component: components){
+		for(Component component: components) {
 
 			g.setColor(Color.RED);
 			
@@ -118,7 +118,7 @@ public class SignFinder extends Application{
 	@Override
 	public GUIEvent updateMouse(PointerEvent event) {
 		
-		if(event.onButtonDown(MouseButton.MOUSE_BUTTON_LEFT)){
+		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 
 			colorStrategy.setColor(layer.getModifiedBuffer().getRGB((int)event.getX(), (int)event.getY()));
 			
@@ -133,12 +133,12 @@ public class SignFinder extends Application{
 	@Override
 	public GUIEvent updateKeyboard(KeyEvent event) {
 		
-		if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)){
+		if(event.isKeyDown(KeyEvent.TSK_SETA_DIREITA)) {
 			frameNumber += 1000;
 			reloadFrame();
 		}
 		
-		if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)){
+		if(event.isKeyDown(KeyEvent.TSK_SETA_ESQUERDA)) {
 			frameNumber -= 1000;
 			reloadFrame();
 		}
