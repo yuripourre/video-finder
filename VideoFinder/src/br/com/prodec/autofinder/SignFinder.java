@@ -64,9 +64,9 @@ public class SignFinder extends Application {
 		
 		try {
 
-			final String BIN_PATH = getClass().getResource("../../../../").toString();
-			
-			BufferedImage frame = FrameGrab.getFrame(new File(BIN_PATH+"video/working_road.mp4"), frameNumber);
+			final String BIN_PATH = getClass().getResource("../../../../video/").toString();
+						
+			BufferedImage frame = FrameGrab.getFrame(new File(BIN_PATH+"working_road.mp4"), frameNumber);
 			layer = new BufferedLayer(frame);
 			
 		} catch (IOException e) {
@@ -90,7 +90,7 @@ public class SignFinder extends Application {
 	}
 	
 	private void filter() {
-		components = filter.filter(layer.getModifiedBuffer(), screen);
+		components = filter.filter(layer.getBuffer(), screen);
 	}
 	
 	@Override
@@ -120,7 +120,7 @@ public class SignFinder extends Application {
 		
 		if(event.isButtonDown(MouseButton.MOUSE_BUTTON_LEFT)) {
 
-			colorStrategy.setColor(layer.getModifiedBuffer().getRGB((int)event.getX(), (int)event.getY()));
+			colorStrategy.setColor(layer.getBuffer().getRGB((int)event.getX(), (int)event.getY()));
 			
 			this.filter();
 						
